@@ -5,6 +5,7 @@ Shift Baru: B
 
 # 1. Proses Login #
 <img width="469" height="1071" alt="Screenshot 2025-11-30 212402" src="https://github.com/user-attachments/assets/d892c415-da24-408e-9a67-474dff628f70" />
+
 # Penjelasan:
 1. Struktur (Widgets)
 _emailTextField & _passwordTextField: Membuat kolom input (TextFormField). Menggunakan TextEditingController untuk mengambil teks yang diketik dan fungsi validator untuk memastikan kolom tidak kosong.
@@ -22,6 +23,7 @@ Status Loading: Menggunakan variabel _isLoading untuk mengelola status tombol (a
 
 # 2. PopUp Berhasil
 <img width="464" height="298" alt="Screenshot 2025-11-30 214004" src="https://github.com/user-attachments/assets/7ba19f7c-cace-44d9-ae1c-0b759c45209e" />
+
 # Kode:
 showDialog(
 context: context,
@@ -39,6 +41,7 @@ barrierDismissible: false,
 builder: (BuildContext context) => const WarningDialog(
 description: "Registrasi gagal, silahkan coba lagi",
 ));
+
 # Penjelasan:
 1. Perintah Inti (showDialog)
 Perintah showDialog dipanggil setelah proses registrasi dianggap berhasil. Fungsi ini bertugas mengambil widget dialog yang Anda buat dan menampilkannya di tengah layar.
@@ -55,6 +58,7 @@ Ketika pengguna menekan tombol "OK" pada popup tersebut, fungsi okClick akan die
 
 # 3. Tambah Data Produk #
 <img width="474" height="1071" alt="Screenshot 2025-11-30 212446" src="https://github.com/user-attachments/assets/3dbc78c1-9fab-4f54-b1ae-7a50b298b6e4" />
+
 # Penjelasan
 1. Penentuan Mode (isUpdate() & initState)
 Widget ProdukForm dapat menerima objek Produk melalui konstruktor (widget.produk).
@@ -85,6 +89,7 @@ Gagal/Error: Menampilkan dialog peringatan (WarningDialog).
 
 # 4. List Produk #
 <img width="471" height="1076" alt="Screenshot 2025-11-30 212458" src="https://github.com/user-attachments/assets/00511098-a184-4b5d-b07a-73312c77cf77" />
+
 # Penjelasan
 1. Struktur Utama
 Scaffold: Menyediakan kerangka halaman.
@@ -108,6 +113,7 @@ Seluruh item dibungkus dalam GestureDetector. Saat diklik (onTap), ia mengarahka
 
 # 5. Detail Produk
 <img width="474" height="1073" alt="Screenshot 2025-11-30 212515" src="https://github.com/user-attachments/assets/23b6cda3-6b73-4293-852a-03fa0f2154c6" />
+
 # Penjelasan
 1. Penerimaan Data
 Widget ProdukDetail adalah StatefulWidget yang menerima objek Produk yang dipilih dari halaman sebelumnya (List Produk) melalui konstruktor (widget.produk).
@@ -131,6 +137,7 @@ Gagal/Error: Menampilkan dialog peringatan (WarningDialog).
 
 # 6. Ubah Produk (edit)
 <img width="470" height="1071" alt="Screenshot 2025-11-30 212553" src="https://github.com/user-attachments/assets/cf298f41-2039-4602-bf82-429dbcc43bee" />
+
 # Penjelasan
 1. Perintah Inti (Navigator.push)
 Navigator.push digunakan untuk berpindah ke halaman baru (menumpuk halaman baru di atas halaman saat ini).
