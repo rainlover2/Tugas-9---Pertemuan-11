@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.toko_api"
+    namespace = "com.example.tokokita"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 

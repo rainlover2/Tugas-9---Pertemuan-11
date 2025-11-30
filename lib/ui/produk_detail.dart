@@ -1,61 +1,102 @@
 import 'package:flutter/material.dart';
-import '../model/produk.dart';
-import '../service/produk_service.dart';
-import 'produk_form.dart';
+import 'package:tokokita/bloc/produk_bloc.dart';
+import 'package:tokokita/model/produk.dart';
+import 'package:tokokita/ui/produk_form.dart';
+import 'package:tokokita/ui/produk_page.dart';
+import 'package:tokokita/widget/warning_dialog.dart';
+// ignore: must_be_immutable
+class ProdukDetail extends StatefulWidget {
+Produk? produk;
+ProdukDetail({Key? key, this.produk}) : super(key: key);
 
-class ProdukDetail extends StatelessWidget {
-  final Produk produk;
+@override
+_ProdukDetailState createState() => _ProdukDetailState();
+}
+class _ProdukDetailState extends State<ProdukDetail> {
+@override
+Widget build(BuildContext context) {
+return Scaffold(
+appBar: AppBar(
+title: const Text('Detail Produk'),
+),
+body: Center(
+child: Column(
+children: [
+Text(
+"Kode : ${widget.produk!.kodeProduk}",
+style: const TextStyle(fontSize: 20.0),
+),
+Text(
 
-  const ProdukDetail({super.key, required this.produk});
+"Nama : ${widget.produk!.namaProduk}",
+style: const TextStyle(fontSize: 18.0),
+),
+Text(
+"Harga : Rp. ${widget.produk!.hargaProduk.toString()}",
+style: const TextStyle(fontSize: 18.0),
+),
+_tombolHapusEdit()
+],
+),
+),
+);
+}
+Widget _tombolHapusEdit() {
+return Row(
+mainAxisSize: MainAxisSize.min,
+children: [
+// Tombol Edit
+OutlinedButton(
+child: const Text("EDIT"),
+onPressed: () {
+Navigator.push(
+context,
+MaterialPageRoute(
+builder: (context) => ProdukForm(
+produk: widget.produk!,
+),
+),
+);
+},
+),
+// Tombol Hapus
+OutlinedButton(
+child: const Text("DELETE"),
+onPressed: () => confirmHapus(),
+),
+],
+);
+}
+void confirmHapus() {
 
-  Future<void> delete(BuildContext context) async {
-    await ProdukService.deleteProduk(produk.id!);
-    Navigator.pop(context);
-  }
+AlertDialog alertDialog = AlertDialog(
+content: const Text("Yakin ingin menghapus data ini?"),
+actions: [
+//tombol hapus
+OutlinedButton(
+child: const Text("Ya"),
+onPressed: () {
+ProdukBloc.deleteProduk(id: int.parse(widget.produk!.id!)).then(
+(value) => {
+Navigator.of(context).push(MaterialPageRoute(
+builder: (context) => const ProdukPage()))
+}, onError: (error) {
+showDialog(
+context: context,
+builder: (BuildContext context) => const WarningDialog(
+description: "Hapus gagal, silahkan coba lagi",
+));
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Detail Produk Ratu")),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Kode: ${produk.kodeProduk}",
-              style: const TextStyle(fontSize: 18),
-            ),
-            Text(
-              "Nama: ${produk.namaProduk}",
-              style: const TextStyle(fontSize: 18),
-            ),
-            Text(
-              "Harga: ${produk.hargaProduk}",
-              style: const TextStyle(fontSize: 18),
-            ),
-            const SizedBox(height: 20),
-            Row(
-              children: [
-                ElevatedButton(
-                  onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => ProdukForm(produk: produk),
-                    ),
-                  ),
-                  child: const Text("Edit"),
-                ),
-                const SizedBox(width: 10),
-                ElevatedButton(
-                  onPressed: () => delete(context),
-                  child: const Text("Delete"),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+});
+},
+),
+//tombol batal
+OutlinedButton(
+child: const Text("Batal"),
+onPressed: () => Navigator.pop(context),
+)
+],
+);
+showDialog(builder: (context) => alertDialog, context: context);
+}
 }

@@ -1,4 +1,4 @@
-package com.example.toko_api
+package com.example.tokokita
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../model/produk.dart';
-import 'package:toko_api/service/api.dart';
+import 'package:tokokita/service/api.dart';
 
 class ProdukService {
   // GET
